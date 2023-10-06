@@ -5,7 +5,9 @@
 
 ## 1. Design your own desktop
 
-GPU
+4090 GPU + supported by Yizhou 
+CPU[Compatible with Graphic Card] + Cooler + Motherboard [WIFI, Compatible with CPU + GPU] + RAM + M.2 SSD + CASE
+
 
 ## 2. Learn to use Github and VScode
 
