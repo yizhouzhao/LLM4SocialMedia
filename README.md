@@ -8,22 +8,22 @@
 4090 GPU + supported by Yizhou 
 CPU[Compatible with Graphic Card] + Cooler + Motherboard [WIFI, Compatible with CPU + GPU] + RAM + M.2 SSD + CASE
 
-## 1.buy parts (✅）
-## 2.research mechanism（✅）
-## 3.build harware （in progress）
-## 4.install software 
+ 1.buy parts (✅）
+ 2.research mechanism（✅）
+ 3.build harware （in progress）
+ 4.install software 
 
 
 ## 2. Learn to use Github and VScode
 
-### 1.establish ssh keygen
-### 2.issue/pr
+ 1.establish ssh keygen
+ 2.issue/pr
 
 ## 3. Related work
 
-### 1.ucla library
-### 2.online resources
-### 3.watch koko
+ 1.ucla library
+ 2.online resources
+ 3.watch koko
 
 
 ## TODO: Start Research (Next week)
