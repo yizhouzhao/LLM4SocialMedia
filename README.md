@@ -10,8 +10,8 @@ CPU[Compatible with Graphic Card] + Cooler + Motherboard [WIFI, Compatible with 
 
  1.buy parts (✅）
  2.research mechanism（✅）
- 3.build harware （in progress）
- 4.install software 
+ 3.build harware （✅）
+ 4.install software(✅) 
 
 
 ## 2. Learn to use Github and VScode
@@ -24,6 +24,7 @@ CPU[Compatible with Graphic Card] + Cooler + Motherboard [WIFI, Compatible with 
  1.ucla library
  2.online resources
  3.watch koko
+ 4.learn transformer
 
 
 ## TODO: Start Research (Next week)
