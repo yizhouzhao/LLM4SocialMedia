@@ -1,5 +1,17 @@
 # LLM4SocialMedia
 
+# TODO 10/23/23
+
+## idea: prompt to decide whether to stay on this video or not
+
+Strategies: 
+  - (1) Questionnaire [Spatial], structured QA questions -> whether to stay on this video or not
+  - (2) Hierarchical [Temporal], time-depending QA questions
+  - (3)* [Causal] Reason you like or not?
+
+Technologies:
+  - (1) VQA models: ViLT,  
+    
 
 # TODO for Madison 10/05/23
 
