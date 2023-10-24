@@ -9,9 +9,13 @@ Strategies:
   - (2) Hierarchical [Temporal], time-depending QA questions
   - (3)* [Causal] Reason you like or not?
 
-Technologies:
-  - (1) VQA models: ViLT,  
-    
+Technologies （get the answers from the questions）:
+  - [Option one] VQA models: ViLT(1.a),  OFA(1.b), MiniGPT-4(1.c = 2.a + ViT)
+  - [Option two] Image/Video captioning e.g. BLIP-2 (2.d) [Search some Video captioning modules]) + QA, *llama2(2.a)*, ChatGPT(2.b), GPT-4*(2.c) [Please help me apply for an API for this.]
+
+Task: 
+  - Please help me construct a llama2 server?
+  - Please help me apply for an API for GPT-4?
 
 # TODO for Madison 10/05/23
 
