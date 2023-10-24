@@ -17,7 +17,7 @@ CPU[Compatible with Graphic Card] + Cooler + Motherboard [WIFI, Compatible with 
 ## 2. Learn to use Github and VScode
 
  1.establish ssh keygen
- 2.issue/pr
+(git config EMAIL AND USER NAME)
 
 ## 3. Related work
 
