@@ -55,6 +55,32 @@ True
 NVIDIA GeForce RTX 4090
   - Please help me apply for an API for GPT-4?
 
+#8. start the setting up of server(please navigate to the corresponding directory using cd)
+  conda install -c anaconda git
+  git clone https://github.com/oobabooga/text-generation-webui
+  pip install -r requirements.txt
+  python server.py
+
+#9.you will get a message saying 
+
+      (textgen2) C:\Users\madis\Desktop\llm\text-generation-webui>python server.py
+      2023-10-30 13:22:47 INFO:Loading the extension "gallery"...
+      Running on local URL:  http://127.0.0.1:7860
+      
+      To create a public link, set `share=True` in `launch()`.
+      
+#10.copy the url, paste into browser,click the upper parameter model
+
+#11.get a model: test :https://huggingface.co/TheBloke/Llama-2-13B-Chat-fp16 
+
+    paste TheBloke/Llama-2-13B-Chat-fp16 into download model square and press download
+    will take a while
+    go to left up and choose the model name in the dropdown menu of model, the click load
+    will take a while
+    go to upper parameter session and press apply flags
+
+  YOU ARE DONE!
+
 # TODO for Madison 10/05/23
 
 ## 1. Design your own desktop
