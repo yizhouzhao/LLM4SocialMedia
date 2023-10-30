@@ -16,22 +16,25 @@ Technologies （get the answers from the questions）:
 Task: 
   - Please help me construct a llama2 server?\
 
-#1. Download and create a anaconda environment: https://www.anaconda.com/download
+# 1. Download and create a anaconda environment: https://www.anaconda.com/download
 
-#2. go to your anaconda navigator and launch the powershell
+# 2. go to your anaconda navigator and launch the powershell
 
-#3. download cuda and cudnn on website, Here is instruction: https://blog.csdn.net/anmin8888/article/details/127910084
+# 3. download cuda and cudnn on website, Here is instruction: https://blog.csdn.net/anmin8888/article/details/127910084
 
-#4.create a new environment using your anaconda powershell
+# 4.create a new environment using your anaconda powershell
 
-conda create --name type_in_your_env_name python=3.10
-conda activate type_in_your_env_name
+        conda create --name type_in_your_env_name python=3.10
+        conda activate type_in_your_env_name
 
-#5.install the gpu version pytorch with cuda support(PLEASE REPLACE UDA toolkit version (e.g., cu111, cu110, cu102, etc.) based on your CUDA installation.)
+# 5.install the gpu version pytorch with cuda support(PLEASE REPLACE UDA toolkit version (e.g., cu111, cu110, cu102, etc.) based on your CUDA installation.)
 
-pip install torch==1.10.0+cu111 torchvision==0.11.1+cu111 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
+THE VEDIO USED ANOTHER COMMAND YOU COULD CHECK IF THERE IS A DIFFERENCE!!
+        (pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117)
+This may be used (I THINK!)
+        pip install torch==1.10.0+cu111 torchvision==0.11.1+cu111 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
 
-#6.check if you are using the gpu version torch(ensure you are using the right environment when using this!!)
+# 6.check if you are using the gpu version torch(ensure you are using the right environment when using this!!)
 
           import torch
           
@@ -45,23 +48,24 @@ pip install torch==1.10.0+cu111 torchvision==0.11.1+cu111 torchaudio==0.10.0 -f 
           
           print(torch.cuda.get_device_name(torch.cuda.current_device()))
 
-#7.if you get THIS then you are alset for the environment
+# 7.if you get THIS then you are alset for the environment
 
-(try) PS C:\Users\madis\Desktop\llm> python .\TORCH.py
-True
-8801
-2.1.0+cu121
-0
-NVIDIA GeForce RTX 4090
+        (try) PS C:\Users\madis\Desktop\llm> python .\TORCH.py
+        True
+        8801
+        2.1.0+cu121
+        0
+        NVIDIA GeForce RTX 4090
+        
   - Please help me apply for an API for GPT-4?
 
-#8. start the setting up of server(please navigate to the corresponding directory using cd)
+# 8. start the setting up of server(please navigate to the corresponding directory using cd)
   conda install -c anaconda git
   git clone https://github.com/oobabooga/text-generation-webui
   pip install -r requirements.txt
   python server.py
 
-#9.you will get a message saying 
+# 9.you will get a message saying 
 
       (textgen2) C:\Users\madis\Desktop\llm\text-generation-webui>python server.py
       2023-10-30 13:22:47 INFO:Loading the extension "gallery"...
@@ -69,9 +73,9 @@ NVIDIA GeForce RTX 4090
       
       To create a public link, set `share=True` in `launch()`.
       
-#10.copy the url, paste into browser,click the upper parameter model
+# 10.copy the url, paste into browser,click the upper parameter model
 
-#11.get a model: test :https://huggingface.co/TheBloke/Llama-2-13B-Chat-fp16 
+# 11.get a model: test :https://huggingface.co/TheBloke/Llama-2-13B-Chat-fp16 
 
     paste TheBloke/Llama-2-13B-Chat-fp16 into download model square and press download
     will take a while
