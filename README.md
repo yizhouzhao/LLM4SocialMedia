@@ -60,10 +60,10 @@ Task:
   - Please help me apply for an API for GPT-4?
 
 ## 8. start the setting up of server(please navigate to the corresponding directory using cd)
-  conda install -c anaconda git
-  git clone https://github.com/oobabooga/text-generation-webui
-  pip install -r requirements.txt
-  python server.py
+          conda install -c anaconda git
+          git clone https://github.com/oobabooga/text-generation-webui
+          pip install -r requirements.txt
+          python server.py
 
 ## 9.you will get a message saying 
 
