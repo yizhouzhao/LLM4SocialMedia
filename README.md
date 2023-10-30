@@ -14,7 +14,45 @@ Technologies （get the answers from the questions）:
   - [Option two] Image/Video captioning e.g. BLIP-2 (2.d) [Search some Video captioning modules]) + QA, *llama2(2.a)*, ChatGPT(2.b), GPT-4*(2.c) [Please help me apply for an API for this.]
 
 Task: 
-  - Please help me construct a llama2 server?
+  - Please help me construct a llama2 server?\
+
+#1. Download and create a anaconda environment: https://www.anaconda.com/download
+
+#2. go to your anaconda navigator and launch the powershell
+
+#3. download cuda and cudnn on website, Here is instruction: https://blog.csdn.net/anmin8888/article/details/127910084
+
+#4.create a new environment using your anaconda powershell
+
+conda create --name type_in_your_env_name python=3.10
+conda activate type_in_your_env_name
+
+#5.install the gpu version pytorch with cuda support(PLEASE REPLACE UDA toolkit version (e.g., cu111, cu110, cu102, etc.) based on your CUDA installation.)
+
+pip install torch==1.10.0+cu111 torchvision==0.11.1+cu111 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
+
+#6.check if you are using the gpu version torch(ensure you are using the right environment when using this!!)
+
+          import torch
+          
+          print(torch.cuda.is_available()) 
+          
+          print(torch.backends.cudnn.version())
+          
+          print(torch.__version__)
+          
+          print(torch.cuda.current_device())
+          
+          print(torch.cuda.get_device_name(torch.cuda.current_device()))
+
+#7.if you get THIS then you are alset for the environment
+
+(try) PS C:\Users\madis\Desktop\llm> python .\TORCH.py
+True
+8801
+2.1.0+cu121
+0
+NVIDIA GeForce RTX 4090
   - Please help me apply for an API for GPT-4?
 
 # TODO for Madison 10/05/23
