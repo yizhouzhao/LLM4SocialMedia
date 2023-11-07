@@ -16,56 +16,78 @@ Technologies （get the answers from the questions）:
 Task: 
   - Please help me construct a llama2 server?\
 
-## 1. Download and create a anaconda environment: https://www.anaconda.com/download
+---------------------------------------------
 
-## 2. go to your anaconda navigator and launch the powershell
+# 11/07/2023: [Video: How To Install LLaMA 2 Locally](https://www.youtube.com/watch?v=k2FHUP0krqg)
 
-## 3. download cuda and cudnn on website, Here is instruction: https://blog.csdn.net/anmin8888/article/details/127910084
+## Install Environment
 
-## 4.create a new environment using your anaconda powershell
+### 1. Download and create a [anaconda environment](https://www.anaconda.com/download)
 
-        conda create --name type_in_your_env_name python=3.10
-        conda activate type_in_your_env_name
+### 2. Go to your anaconda navigator and launch the powershell
 
-## 5.install the gpu version pytorch with cuda support(PLEASE REPLACE UDA toolkit version (e.g., cu111, cu110, cu102, etc.) based on your CUDA installation.)
+### [Optional] 3. Download [cuda and cudnn](https://blog.csdn.net/anmin8888/article/details/127910084) on website, Here is instruction.
+
+## 4.Create a new environment using your anaconda powershell
+
+```bash
+conda create --name type_in_your_env_name python=3.10
+conda activate type_in_your_env_name
+```
+
+
+### 5.Install the gpu version pytorch with cuda support(PLEASE REPLACE UDA toolkit version (e.g., cu111, cu110, cu102, etc.) based on your CUDA installation.)
 
         THE VEDIO USED ANOTHER COMMAND YOU COULD CHECK IF THERE IS A DIFFERENCE!!
         (pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117)
         This may be used (I THINK!)
         pip install torch==1.10.0+cu111 torchvision==0.11.1+cu111 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
 
-## 6.check if you are using the gpu version torch(ensure you are using the right environment when using this!!)
+### 6.Check if you are using the gpu version torch(ensure you are using the right environment when using this!!)
 
-          import torch
-          
-          print(torch.cuda.is_available()) 
-          
-          print(torch.backends.cudnn.version())
-          
-          print(torch.__version__)
-          
-          print(torch.cuda.current_device())
-          
-          print(torch.cuda.get_device_name(torch.cuda.current_device()))
+```python
+import torch
 
-## 7.if you get THIS then you are alset for the environment
+print(torch.cuda.is_available()) 
 
+print(torch.backends.cudnn.version())
+
+print(torch.__version__)
+
+print(torch.cuda.current_device())
+
+print(torch.cuda.get_device_name(torch.cuda.current_device()))
+```
+
+
+### 7.if you get THIS then you are alset for the environment
+
+```
         (try) PS C:\Users\madis\Desktop\llm> python .\TORCH.py
         True
         8801
         2.1.0+cu121
         0
         NVIDIA GeForce RTX 4090
-        
+```
+
   - Please help me apply for an API for GPT-4?
 
-## 8. start the setting up of server(please navigate to the corresponding directory using cd)
-          conda install -c anaconda git
-          git clone https://github.com/oobabooga/text-generation-webui
-          pip install -r requirements.txt
-          python server.py
+## Server Set-up
 
-## 9.you will get a message saying 
+### 8. Start the setting up of server(please navigate to the corresponding directory using cd)
+```bash
+conda install -c anaconda git
+git clone https://github.com/oobabooga/text-generation-webui
+cd text-generation-webui
+pip install -r requirements.txt
+
+# start the server
+python server.py
+```
+
+
+## 9. You will get a message saying 
 
       (textgen2) C:\Users\madis\Desktop\llm\text-generation-webui>python server.py
       2023-10-30 13:22:47 INFO:Loading the extension "gallery"...
