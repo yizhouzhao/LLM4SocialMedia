@@ -1,5 +1,36 @@
 # LLM4SocialMedia
 
+## Keep top
+
+[Overleaf Paper](https://www.overleaf.com/3926568544nvdtkxktjptn#b091bd)
+
+# TODO: 11/08/2023
+
+## Set up a server for Llama2 server.
+
+For Madison:
+
+- (1)  Get familiar with AWS.
+
+  EC2 -> us-west-2 -> Ubuntu -> g5.2xlarge -> 100GB
+  
+- (1) Get familiar with Ubuntu command line
+
+  Install ubuntu on windows
+
+For Yizhou:
+
+- API call for the text-generation-webui
+
+
+For both: 
+
+- See paper writing
+
+```bash
+ssh -i ov6.pem ubuntu@54.245.65.14
+```
+
 # TODO 10/23/23
 
 ## idea: prompt to decide whether to stay on this video or not
