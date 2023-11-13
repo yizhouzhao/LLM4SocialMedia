@@ -34,3 +34,25 @@ python examples/stream.py
 ```
 http://localhost:5000/docs
 ```
+---
+
+# How to Set-up Models with multi-modeality
+
+## 1. Download [llava model](https://huggingface.co/TheBloke/llava-v1.5-13B-GPTQ)
+
+with model tag:
+
+`TheBloke/llava-v1.5-13B-GPTQ:gptq-4bit-32g-actorder_True`
+
+## 2. Start the server using the following command
+
+```bash
+python server.py --model TheBloke_llava-v1.5-13B-GPTQ_gptq-4bit-32g-actorder_True --multimodal-pipeline llava-v1.5-13b --disable_exllama --loader autogptq --api --extensions multimodal
+```
+
+## 3. Now run the script in the example folder to interact with mutli-modality
+
+```bash
+cd examples
+python multimodel.py
+```
