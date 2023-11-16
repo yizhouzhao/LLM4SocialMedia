@@ -2,12 +2,50 @@
 
 ---
 
+## 0. How to set up an EC2 instance
+
+## 0.1 Start an EC2 instance
+
+## 0.2 Configure the env for LLM on EC2
+
+[Ignore] Install anaconda
+```bash
+wget https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
+bash Anaconda3-2023.09-0-Linux-x86_64.sh
+```
+
+Activate the environment
+```bash
+conda env list
+source activate pytorch
+python
+```
+
+The python version should be 3.10, if not we have to install again
+
+
+```python
+#check pytorch
+import torch
+print(torch.__version__)
+print(torch.cuda.is_available())
+```
+
+Install the `text-generation-webui`
+
+```bash
+git clone https://github.com/oobabooga/text-generation-webui
+cd text-generation-webui
+pip install -r requirements.txt
+```
+
 ## 1. Clone and Install the `Text-Generation-Webui` as described in `README.md`
 
 ```bash
 git clone https://github.com/oobabooga/text-generation-webui
 cd text-generation-webui
 pip install -r requirements.txt
+python server.py --share --listen
 ```
 
 ## 2. Install the [OpenAI API](https://github.com/oobabooga/text-generation-webui/wiki/12-%E2%80%90-OpenAI-API) extension described in the document

@@ -1,6 +1,8 @@
 import requests
 
-url = "http://127.0.0.1:5000/v1/chat/completions"
+REMOTE_IP = "52.25.231.171/"
+
+url = f"http://{REMOTE_IP}:5000/v1/chat/completions"
 
 headers = {
     "Content-Type": "application/json"

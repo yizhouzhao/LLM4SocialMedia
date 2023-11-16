@@ -2,7 +2,8 @@ import requests
 import sseclient  # pip install sseclient-py
 import json
 
-url = "http://127.0.0.1:5000/v1/chat/completions"
+REMOTE_IP = "52.25.231.171"
+url = "http://52.25.231.171:5000/v1/chat/completions"
 
 headers = {
     "Content-Type": "application/json"
