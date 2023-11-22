@@ -47,6 +47,11 @@ cd text-generation-webui
 pip install -r requirements.txt
 python server.py --share --listen
 ```
+note that you need to pip install the corresponding packages, if the python server.py gives corresponding error, make sure to download the gradio version 3.50.2
+
+```bash
+pip install gradio==3.50.2
+
 
 ## 2. Install the [OpenAI API](https://github.com/oobabooga/text-generation-webui/wiki/12-%E2%80%90-OpenAI-API) extension described in the document
 
