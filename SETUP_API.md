@@ -51,7 +51,7 @@ note that you need to pip install the corresponding packages, if the python serv
 
 ```bash
 pip install gradio==3.50.2
-
+```
 
 ## 2. Install the [OpenAI API](https://github.com/oobabooga/text-generation-webui/wiki/12-%E2%80%90-OpenAI-API) extension described in the document
 
