@@ -68,12 +68,12 @@ python server.py --extensions openai --listen
 ```
 after this you will get
 
-
+```
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
 Running on local URL:  http://0.0.0.0:7860
-
+```
 replace 0.0.0.0 with your elastic ip that you associated with your EC2 instances
 type the adress http://fill.in.your.own:7860 in to your web browser and download and load the model under the model tag
 
