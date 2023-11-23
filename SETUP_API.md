@@ -66,12 +66,24 @@ Start the server, and select the model as usual:
 ```bash
 python server.py --extensions openai --listen
 ```
+after this you will get
+
+
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+Running on local URL:  http://0.0.0.0:7860
+
+replace 0.0.0.0 with your elastic ip that you associated with your EC2 instances
+type the adress http://fill.in.your.own:7860 in to your web browser and download and load the model under the model tag
 
 ## 3. Now run the script in the example folder to chat
 
 ```bash
 python examples/stream.py
 ```
+use vscode on your local computer or other ides and open a cmd console, activate your env and navigate into your examples folder that you can fetch from our github
+(pip install may be required and makesure to try upgrade your package if you encounter errors)
 
 ## (Optional) Read more by opening the url
 ```
