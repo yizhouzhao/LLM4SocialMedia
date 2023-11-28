@@ -101,8 +101,10 @@ with model tag:
 
 ## 2. Start the server using the following command
 
+Remember to install the openAI API
+
 ```bash
-python server.py --model TheBloke_llava-v1.5-13B-GPTQ_gptq-4bit-32g-actorder_True --multimodal-pipeline llava-v1.5-13b --disable_exllama --loader autogptq --api --extensions multimodal
+python server.py --model TheBloke_llava-v1.5-13B-GPTQ_gptq-4bit-32g-actorder_True --multimodal-pipeline llava-v1.5-13b --disable_exllama --loader autogptq --api --extensions multimodal --listen
 ```
 
 ## 3. Now run the script in the example folder to interact with mutli-modality
