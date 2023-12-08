@@ -2,8 +2,7 @@ import requests
 import sseclient  # pip install sseclient-py
 import json
 
-REMOTE_IP = "52.25.231.171"
-url = "http://52.25.231.171:5000/v1/chat/completions"
+url = "http://127.0.0.1:5000/v1/chat/completions"
 
 headers = {
     "Content-Type": "application/json"
@@ -15,7 +14,7 @@ while True:
     user_message = input("> ")
     history.append({"role": "user", "content": user_message})
     data = {
-        "mode": "instruct",
+        "mode": "chat",
         "stream": True,
         "messages": history
     }
@@ -28,7 +27,7 @@ while True:
         payload = json.loads(event.data)
         chunk = payload['choices'][0]['message']['content']
         assistant_message += chunk
-        print(chunk, end='')
+        print(chunk, end='') 
 
     print()
     history.append({"role": "assistant", "content": assistant_message})
