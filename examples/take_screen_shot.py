@@ -32,9 +32,9 @@ def retrive_answer(Img):
     with open(Img, 'rb') as f:
         
         img_str = base64.b64encode(f.read()).decode('utf-8')
-        prompt = CONTEXT + f'### Human: what is inside the picture?: \n<img src="data:image/jpeg;base64,{img_str}">### Assistant: '
-        response = (requests.post('http://127.0.0.1:5000/v1/completions', json={'prompt': prompt, 'stop': ['\n###']}).json())
-        # print(response)
+        prompt = CONTEXT + f'### Human: Please point out there is a cat inside the image or not and describe the image.: \n<img src="data:image/jpeg;base64,{img_str}">### Assistant: '
+        response = (requests.post('http://127.0.0.1:5000/v1/completions', json={'prompt': prompt, 'max_tokens':200, 'stop': ['\n###']}).json())
+        # print(response)2002
         # print('\n')
         response = str(response)
         pattern = r"'text': (.*?), 'logprobs'"
@@ -65,7 +65,7 @@ while i<10:
     convert_png_to_jpeg('left_half.png', 'left_half.jpeg', quality=75)
 
     extracted_text = retrive_answer('left_half.jpeg')
-    user_message = f"I am scrolling on tik_tok, and this vedio is about {extracted_text}, please help me decide whether to stay on the video or not. Please include yes or no in your answer, just responde in one word."
+    user_message = f"I am a cat lover, and I am scrolling on tik_tok to find cat videos, and this video is about {extracted_text}, Please help me decide whether to stay on the video or not. Please include yes or no in your answer, just responde in one word."
     print(user_message)
     history.append({"role": "user", "content": user_message})
     data = {
@@ -82,6 +82,8 @@ while i<10:
         print('sleeping... #######                                          18%')
         time.sleep(10)
         pyautogui.press('down')
+        time.sleep(0.5)
     else:
         pyautogui.press('down')
+        time.sleep(0.5)
     i=i+1
