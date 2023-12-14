@@ -1,14 +1,16 @@
 # How to Set-up different multi-modeality models
 
-## 1. Download different models like [llava model](https://huggingface.co/TheBloke/llava-v1.5-13B-GPTQ) [Vicuna v0 13B](https://huggingface.co/anon8231489123/vicuna-13b-GPTQ-4bit-128g) [Vicuna v1 13B](https://huggingface.co/TheBloke/Vicuna-13B-1.1-GPTQ?text=Hey+my+name+is+Julien%21+How+are+you%3F)
+## 1. Download different models like [llava model](https://huggingface.co/TheBloke/llava-v1.5-13B-GPTQ)/[Vicuna v0 13B](https://huggingface.co/anon8231489123/vicuna-13b-GPTQ-4bit-128g)/[Vicuna v1 13B](https://huggingface.co/TheBloke/Vicuna-13B-1.1-GPTQ?text=Hey+my+name+is+Julien%21+How+are+you%3F)
 
 with follwing model tags:
 
 `TheBloke/llava-v1.5-13B-GPTQ:gptq-4bit-32g-actorder_True`
+
 `anon8231489123/vicuna-13b-GPTQ-4bit-128g`
+
 `TheBloke/Vicuna-13B-1.1-GPTQ`
 
-## 2. Using different piplines for each models to test different multi-modelity models performance on TikTok[reference](https://github.com/oobabooga/text-generation-webui/blob/main/extensions/multimodal/README.md)
+## 2. Using different piplines for each models to test different multi-modelity models performance on TikTok. [reference](https://github.com/oobabooga/text-generation-webui/blob/main/extensions/multimodal/README.md)
 As of now, the following multimodal pipelines are supported:
 |Pipeline|`--multimodal-pipeline`|Default LLM|LLM info(for the linked model)|Pipeline repository|
 |-|-|-|-|-|
