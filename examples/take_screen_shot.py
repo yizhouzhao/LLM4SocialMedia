@@ -6,6 +6,11 @@ import pyautogui
 import cv2
 import time
 from PIL import Image
+# import subprocess
+import requests
+from sklearn.metrics import precision_score, recall_score, f1_score
+
+
 
 def convert_png_to_jpeg(input_path, output_path, quality=75):
     # Open the PNG image
@@ -32,7 +37,7 @@ def retrive_answer(Img):
     with open(Img, 'rb') as f:
         
         img_str = base64.b64encode(f.read()).decode('utf-8')
-        prompt = CONTEXT + f'### Human: Please point out there is a cat inside the image or not and describe the image.: \n<img src="data:image/jpeg;base64,{img_str}">### Assistant: '
+        prompt = CONTEXT + f'### Human: Please first give the answer there is a cat inside the image or not and then describe the image.: \n<img src="data:image/jpeg;base64,{img_str}">### Assistant: '
         response = (requests.post('http://127.0.0.1:5000/v1/completions', json={'prompt': prompt, 'max_tokens':200, 'stop': ['\n###']}).json())
         # print(response)2002
         # print('\n')
@@ -46,6 +51,12 @@ def retrive_answer(Img):
     return extracted_text
 
 import requests
+def evaluate(predictions, labels):
+    precision = precision_score(labels, predictions)
+    recall = recall_score(labels, predictions)
+    f1 = f1_score(labels, predictions)
+
+    return precision, recall, f1
 
 url = "http://127.0.0.1:5000/v1/chat/completions"
 pyautogui.moveTo(455,419)
@@ -57,17 +68,20 @@ headers = {
 }
 
 history = []
+label = 0
+predictions = []
+i = 0
 
-i=0
-while i<10:
+while i < 10:
     left_screen_shot()
 
     convert_png_to_jpeg('left_half.png', 'left_half.jpeg', quality=75)
 
     extracted_text = retrive_answer('left_half.jpeg')
-    user_message = f"I am a cat lover, and I am scrolling on tik_tok to find cat videos, and this video is about {extracted_text}, Please help me decide whether to stay on the video or not. Please include yes or no in your answer, just responde in one word."
+    user_message = f"I am a cat lover, and I am scrolling on tik_tok to find cat videos, and this video is about {extracted_text}, If video includes cat, I will stay at this video otherwise will not stay. Please help me decide whether to stay on the video or not. Please include yes or no in your answer, just respond in one word."
     print(user_message)
     history.append({"role": "user", "content": user_message})
+
     data = {
         "mode": "chat",
         #"character": "Example",
@@ -78,7 +92,15 @@ while i<10:
     assistant_message = response.json()['choices'][0]['message']['content']
     history.append({"role": "assistant", "content": assistant_message})
     print(assistant_message)
+
     if "yes" in assistant_message.lower():
+        label = 1
+    else:
+        label = 0
+
+    predictions.append(label)
+    
+    if label == 1:
         print('sleeping... #######                                          18%')
         time.sleep(10)
         pyautogui.press('down')
@@ -86,4 +108,12 @@ while i<10:
     else:
         pyautogui.press('down')
         time.sleep(0.5)
-    i=i+1
+
+    i = i + 1
+
+print(predictions)
+labels = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]  # Assuming your actual labels
+precision, recall, f1 = evaluate(predictions, labels)
+print(f"Precision: {precision}")
+print(f"Recall: {recall}")
+print(f"F1 Score: {f1}")
