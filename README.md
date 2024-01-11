@@ -4,6 +4,13 @@
 
 [Overleaf Paper](https://www.overleaf.com/3926568544nvdtkxktjptn#b091bd)
 
+# TODO: 01/10/2024
+(1) upgrade take screenshot program to save each captured images and corresponding LMM responses separately, instead of overwriting the previous ones, to better facilitate future experiments and tests.
+(2) Read several papers to design experiments step
+    a. https://arxiv.org/pdf/2310.03744.pdf
+    b. https://arxiv.org/pdf/2311.11865.pdf
+
+
 # TODO: 11/08/2023
 
 ## Set up a server for Llama2 server.
