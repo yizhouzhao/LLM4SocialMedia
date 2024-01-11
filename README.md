@@ -6,9 +6,14 @@
 
 # TODO: 01/10/2024
 (1) upgrade take screenshot program to save each captured images and corresponding LMM responses separately, instead of overwriting the previous ones, to better facilitate future experiments and tests.
-(2) Read several papers to design experiments step
-    a. https://arxiv.org/pdf/2310.03744.pdf
-    b. https://arxiv.org/pdf/2311.11865.pdf
+
+(2) Read several papers to design experiment
+
+a. [LLava](https://arxiv.org/pdf/2310.03744.pdf)
+    
+b. [VLM-Eval: A General Evaluation on Video Large Language Models](https://arxiv.org/pdf/2311.11865.pdf)
+
+c.
 
 
 # TODO: 11/08/2023
