@@ -12,3 +12,4 @@ autogui:
     empty_click_point: [710, 1100] # point to click when there is nothing to click
     video_click_point: [1920, 1080] # point to click when there is a video to click
     image_crop_box: [800, 420, 1800, 2000] # crop box for screenshot
+    timestamp_crop_box: [1595, 1945, 1776, 1983] # crop box for timestamp

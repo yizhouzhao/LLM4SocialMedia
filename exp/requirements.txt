@@ -3,3 +3,4 @@ paddleocr
 google-generativeai
 hydra-core
 python-dotenv
+paddlepaddle
