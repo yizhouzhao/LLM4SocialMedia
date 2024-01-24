@@ -2,3 +2,11 @@ exp0:
   name: Google Gemini Plain Strategy
   model: gemini
   platform: tiktok
+  url: https://www.tiktok.com/foryou
+
+
+autogui:
+  desktop: yizhou's desktop
+  resolution: [3840, 2160]
+  empty_click_point: [710, 1100] # point to click when there is nothing to click
+  video_click_point: [1920, 1080] # point to click when there is a video to click
