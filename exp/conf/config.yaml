@@ -1,4 +1,4 @@
-db:
-  driver: mysql
-  user: omry
-  pass: secret
+exp0:
+  name: Google Gemini Plain Strategy
+  model: gemini
+  platform: tiktok
