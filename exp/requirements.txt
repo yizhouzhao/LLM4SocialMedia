@@ -1,6 +1,7 @@
 pyautogui
-paddleocr
 google-generativeai
 hydra-core
 python-dotenv
-paddlepaddle
+langchain
+langchain-google-genai
+openai

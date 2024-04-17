@@ -1,3 +1,4 @@
+
 import base64
 import requests
 import re
@@ -9,8 +10,9 @@ with open('6.jpeg', 'rb') as f:
     img_str = base64.b64encode(f.read()).decode('utf-8')
     prompt = CONTEXT + f'### Human:Describe this image.: \n<img src="data:image/jpeg;base64,{img_str}">### Assistant: '
     response = (requests.post('http://127.0.0.1:5000/v1/completions', json={'prompt': prompt, 'max_tokens':200,'stop': ['\n###']}).json())
-    print(response)
-    print('\n')
+    print("Status Code:", response.status_code)
+    print("Response Content:", response.text)  # 'text' attribute to see the
+
     # response = str(response)
     # pattern = r"'text': (.*?), 'logprobs'"
 
