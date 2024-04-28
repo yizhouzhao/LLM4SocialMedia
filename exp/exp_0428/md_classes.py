@@ -11,7 +11,7 @@ from langchain_core.messages import HumanMessage
 from openai import OpenAI
 import base64
 import re
-import csv
+from google.generativeai.types import generation_types
 
 def llava_image_to_text(prompt, Img):
 
@@ -101,33 +101,13 @@ def gpt_chat(prompt, config):
     text = response.choices[0].message.content
     return text
 
-# def gemini_image_to_text(prompt, image_path, config):
-#     genai.configure(api_key=config["GOOGLE_API_KEY"])
-#     os.environ['GOOGLE_API_KEY'] = config["GOOGLE_API_KEY"]
-#     img = encode_image(image_path)
 
-#     llm = ChatGoogleGenerativeAI(model='gemini-pro-vision')
-#     message = HumanMessage(
-#         content=[
-#             {'type':'text','text':prompt},
-#             {'type':'image_url','image_url':image_path}
-#         ]
-#     )
-          
-            
-#     response = llm.invoke([message])
-#     print(f"-------here is the image{image_path} to text-------")
-#     print(response.content)
-#     print("end of image to text")
-#     return str(response.content)
-from google.generativeai.types import generation_types
 
 def gemini_image_to_text(prompt, image_path, config):
     try:
         genai.configure(api_key=config["GOOGLE_API_KEY"])
         os.environ['GOOGLE_API_KEY'] = config["GOOGLE_API_KEY"]
-        
-        # Assuming you have a function named encode_image to encode the image
+
         img = encode_image(image_path)
 
         llm = ChatGoogleGenerativeAI(model='gemini-pro-vision')
@@ -164,12 +144,6 @@ def gemini_chat(prompt, config):
     return str(response.text)
 
 
-def save_to_csv(self, image_path, extracted_text, interest, response):
-    with open(f'{self.name}.csv', 'a', newline='') as csvfile:
-        fieldnames = ['Image Path', 'Extracted Text', 'Interest', 'Response']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writerow({'Image Path': image_path, 'Extracted Text': extracted_text, 'Interest': interest, 'Response': response})
-
 class GPT4:
     def __init__(self):
         self.name = 'GPT4'
@@ -184,6 +158,19 @@ class GPT4:
         self.save_to_csv(image_path, extracted_text, interest, response)
         return str(response) 
         #(yes/no)
+    def spacial_strategy(self, image_path, interest, cate1, cate2, cate3, cate4, cate5):
+        prompt1 = "please Describe this image in a few words in English"
+        extracted_text = gpt_image_to_text(prompt1, image_path,self.config)
+        prompt2 = f"I am scrolling on TikTok, and this video is about {extracted_text}, given 7 catergories: {cate1}, {cate2}, {cate3}, {cate4}, {cate5}, {interest}, other.  Help me decide which category it belongs to. Please answer in a single word."
+        response = gemini_chat(prompt2,self.config)
+        return str(response)
+    def ask_general(self, interest):
+        prompt = f"I am scrolling on TikTok, I am an illiterate person who is interested in {interest}. Can you come up with general visual content related but is not {interest} I would want to watch? Answer short word separated in commas. Your response should only be the answer."
+        response = gpt_chat(prompt,self.config)
+        response.replace(".", '')
+        categories = re.split(r'\s*,\s*', response)
+        cate1, cate2, cate3, cate4, cate5 = categories[:5]
+        return cate1, cate2, cate3, cate4, cate4, cate5
     
 
 class Llava:
@@ -214,7 +201,7 @@ class Gemini:
             return "no"
         prompt2 = f"""I am a {interest} lover, and I am scrolling on TikTok to find {interest} videos, and this video is about {extracted_text}. Please help me decide whether to stay on the video or not. Please include yes or no in your answer, just respond in one word."""
         response = gemini_chat(prompt2,self.config)
-        return str(response)
+        return prompt2, str(response)
     def spacial_strategy(self, image_path, interest, cate1, cate2, cate3, cate4, cate5):
         prompt1 = "please Describe this image in a few words in English"
         extracted_text = gemini_image_to_text(prompt1, image_path,self.config)
@@ -228,6 +215,9 @@ class Gemini:
         categories = re.split(r'\s*,\s*', response)
         cate1, cate2, cate3, cate4, cate5 = categories[:5]
         return cate1, cate2, cate3, cate4, cate4, cate5
+    def plain_strategy(self):
+        prompt = "I am scrolling on TikTok, and this video is about \{extracted text\}. Please help me decide whether to stay on the video or not. Please include yes or no in your answer, just respond in one word."
+        
     
 
     

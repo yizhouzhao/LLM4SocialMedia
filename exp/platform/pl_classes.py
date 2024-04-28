@@ -3,8 +3,6 @@ import time
 import win32gui
 import win32con
 import subprocess
-import pyautogui
-
 
 
 def open_and_position_chrome_window(url):
@@ -21,7 +19,7 @@ def open_and_position_chrome_window(url):
     subprocess.run(command, shell=True)
 
     # Wait for the window to open and become the foreground window
-    time.sleep(1)
+    time.sleep(5)
 
     def get_foreground_window_handle():
         """
@@ -53,7 +51,6 @@ def open_and_position_chrome_window(url):
 
     # Resize and move the foreground window
     resize_and_move_window(foreground_window_handle)
-    
 def open_and_position_browser(url, window_title):
     # Open the browser to the specified URL
     webbrowser.open(url)
@@ -78,73 +75,28 @@ def open_and_position_browser(url, window_title):
     else:
         print("Browser window not found. Please ensure the title is correct and the browser is open to the specified page.")
 
-def take_screen_shot(self):
-    width = self.bottom_right[0] - self.top_left[0]
-    height = self.bottom_right[1] - self.top_left[1]
-
-    # Take a screenshot of the specified region using the class variables
-    screenshot = pyautogui.screenshot(region=(self.top_left[0], self.top_left[1], width, height))
-    self.count += 1  
-
-    
-    file_name = f"{self.name}{self.count}.jpeg"
-    screenshot.save(file_name)
-    print(file_name)
-    return file_name
-
-
-
 class Snap:
     def __init__(self):
         self.url = "https://www.snapchat.com/spotlight?locale=en-US"
         self.window_title = "Spotlight - Google Chrome"
-        self.name = 'Snap'
-        self.top_left = [44,240]
-        self.bottom_right = [567,1056]
-        self.count = 0
+        
 
     def open_and_position_browser(self):
-        # open_and_position_browser(self.url, self.window_title)
-        open_and_position_chrome_window(self.url)
+        open_and_position_browser(self.url, self.window_title)
 
 class TikTok:
     def __init__(self):
         self.url = "https://www.tiktok.com/"
         self.window_title = "TikTok - Make Your Day - Google Chrome"
-        self.name = 'TikTok'
-        self.top_left = [28,188]
-        self.bottom_right = [648,1273]
-        self.count = 0
 
     def open_and_position_browser(self):
         open_and_position_browser(self.url, self.window_title)
-        # pyautogui.click(711,875)#continue
-        pyautogui.click(668,598)#enter the vedio
-        time.sleep(5)
 
 class Youtube:
     def __init__(self):
         self.url = 'https://www.youtube.com/shorts/'
-        self.top_left = [356,177]
-        self.bottom_right = [980,1306]
-        self.name = 'Youtube'
-        self.count = 0
-
-    def open_and_position_browser(self):
-        open_and_position_chrome_window(self.url)
         
-class Instagram:
-    def __init__(self):
-        self.url = 'https://www.instagram.com/reels/'
-        self.window_title = "Instagram - Google Chrome"
-        self.top_left = [410,160]
-        # [272,153]
-        self.bottom_right = [998,1133]
-        # [914,1344]
 
-        self.name = 'instagram'
-        self.count = 0
+    def open_and_position_chrome_window(self):
+        open_and_position_chrome_window(self.url)
 
-    def open_and_position_browser(self):
-        open_and_position_browser(self.url, self.window_title)
-    
