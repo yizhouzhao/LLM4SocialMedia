@@ -5,7 +5,7 @@ import win32con
 import subprocess
 import pyautogui
 import os
-
+import datetime
 
 def open_and_position_chrome_window(url):
     # Path to Chrome executable
@@ -78,7 +78,7 @@ def open_and_position_browser(url, window_title):
     else:
         print("Browser window not found. Please ensure the title is correct and the browser is open to the specified page.")
 
-def take_screen_shot(self):
+def take_screen_shot(self,t):
     width = self.bottom_right[0] - self.top_left[0]
     height = self.bottom_right[1] - self.top_left[1]
 
@@ -87,19 +87,22 @@ def take_screen_shot(self):
     self.count += 1  
 
   # Create a directory in the current working directory
-    save_directory = os.path.join(os.getcwd(), 'TikTok_1')  # Correct path to save in current directory
+
+
+    
+    save_directory = os.path.join(os.getcwd(), f'{self.name}{t}')  # Correct path to save in current directory
     os.makedirs(save_directory, exist_ok=True)
 
     file_name = f"{self.name}{self.count}.jpeg"
     file_path = os.path.join(save_directory, file_name)
     try:
         screenshot.save(file_path)
-        print(f"Saved screenshot as {file_path}")
+        print(f"Saved screenshot as {file_name}")
     except Exception as e:
         print(f"Failed to save screenshot: {e}")
         
     print(file_name)
-    return file_name
+    return file_path
 
 
 

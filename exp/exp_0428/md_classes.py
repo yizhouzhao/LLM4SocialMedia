@@ -12,55 +12,98 @@ from openai import OpenAI
 import base64
 import re
 from google.generativeai.types import generation_types
+import replicate
 
-def llava_image_to_text(prompt, Img):
+# client = replicate.Client(api_key =config["REPLICATE_API_TOKEN"])
+# input = {
+#     "image": "https://replicate.delivery/pbxt/KRULC43USWlEx4ZNkXltJqvYaHpEx2uJ4IyUQPRPwYb8SzPf/view.jpg",
+#     "prompt": "Are you allowed to swim here?"
+# }
 
-    CONTEXT = "You are LLaVA, a large language and vision assistant trained by UW Madison WAIV Lab. You are able to understand the visual content that the user provides, the user provided a base64 image strings consist of different characters, please regard it as a picture, and assist the user with a variety of tasks using natural language. Follow the instructions carefully and explain your answers in detail.### Human: Hi!### Assistant: Hi there! How can I help you today?\n"
+# output = replicate.run(
+#     "yorickvp/llava-13b:b5f6212d032508382d61ff00469ddda3e32fd8a0e75dc39d8a4191bb742157fb",
+#     input=input
+# )
+# print("".join(output))
+# #=> "Yes, you are allowed to swim in the lake near the pier. ...
 
-    with open(Img, 'rb') as f:
+
+# def llava_image_to_text(api_key, image_url, prompt):
+#     client = replicate.Client(api_key=api_key)
+#     try:
+#         input_data = {
+#             "image": image_url,
+#             "prompt": prompt
+#         }
+#         output = client.run(
+#             "yorickvp/llava-13b:b5f6212d032508382d61ff00469ddda3e32fd8a0e75dc39d8a4191bb742157fb",
+#             input=input_data
+#         )
+#         print("-------here is the image to text-------")
+#         print("".join(output))
+#         print("end of image to text")
+#         return "".join(output)
+
+#     except Exception as e:
+#         print(f"Exception occurred: {str(e)}")
+#         return "Exception occurred"
+    
+
+
+# def llava_image_to_text(prompt, Img):
+
+#     CONTEXT = "You are LLaVA, a large language and vision assistant trained by UW Madison WAIV Lab. You are able to understand the visual content that the user provides, the user provided a base64 image strings consist of different characters, please regard it as a picture, and assist the user with a variety of tasks using natural language. Follow the instructions carefully and explain your answers in detail.### Human: Hi!### Assistant: Hi there! How can I help you today?\n"
+
+#     with open(Img, 'rb') as f:
         
-        img_str = base64.b64encode(f.read()).decode('utf-8')
-        prompt = CONTEXT + f'### Human: {prompt}: \n<img src="data:image/jpeg;base64,{img_str}">### Assistant: '
-        response = (requests.post('http://127.0.0.1:5000/v1/completions', json={'prompt': prompt, 'max_tokens':100, 'stop': ['\n###']}).json())
-        response = str(response)
-        pattern = r"'text': (.*?), 'logprobs'"
+#         img_str = base64.b64encode(f.read()).decode('utf-8')
+#         prompt = CONTEXT + f'### Human: {prompt}: \n<img src="data:image/jpeg;base64,{img_str}">### Assistant: '
+#         response = (requests.post('http://127.0.0.1:5000/v1/completions', json={'prompt': prompt, 'max_tokens':100, 'stop': ['\n###']}).json())
+#         response = str(response)
+#         pattern = r"'text': (.*?), 'logprobs'"
 
-        match = re.search(pattern, response)
-        if match:
-            extracted_text = match.group(1)
-            print(extracted_text)
-    return extracted_text
+#         match = re.search(pattern, response)
+#         if match:
+#             extracted_text = match.group(1)
+#             print(extracted_text)
+#     return extracted_text
 
-def llava_chat(prompt):
-    headers = {
-        "Content-Type": "application/json"
-    }
-    history = []
-    predictions = []
+# def llava_chat(prompt):
+#     headers = {
+#         "Content-Type": "application/json"
+#     }
+#     history = []
+#     predictions = []
 
-    url = "http://127.0.0.1:5000/v1/chat/completions"
+#     url = "http://127.0.0.1:5000/v1/chat/completions"
     
     
-    ######strategy!!!###########
-    user_message = prompt
-    history.append({"role": "user", "content": user_message})
+#     ######strategy!!!###########
+#     user_message = prompt
+#     history.append({"role": "user", "content": user_message})
     
-    data = {
-        "mode": "chat",
-        "messages": history
-    }
+#     data = {
+#         "mode": "chat",
+#         "messages": history
+#     }
 
-    response = requests.post(url, headers=headers, json=data, verify=False)
-    assistant_message = response.json()['choices'][0]['message']['content']
-    print(assistant_message)
-    return assistant_message
+#     response = requests.post(url, headers=headers, json=data, verify=False)
+#     assistant_message = response.json()['choices'][0]['message']['content']
+#     print(assistant_message)
+#     return assistant_message
 
 
 
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
+    
 
+def encode_image_llava(image_path):
+    with open(image_path, "rb") as image_file:
+        data= base64.b64encode(image_file.read()).decode('utf-8')
+        image = f"data:application/octet-stream;base64,{data}"
+        return image
 
 def gpt_image_to_text(prompt, image_path, config):
     base64_image = encode_image(image_path)
@@ -100,8 +143,49 @@ def gpt_chat(prompt, config):
     )
     text = response.choices[0].message.content
     return text
+###Model==LLava####
+def llava_image_to_text(prompt,image_path,config):
+    # os.environ["REPLICATE_API_TOKEN"] = "TOKEN"
+    base64_image = encode_image_llava(image_path)
+    client = replicate.Client(api_token=config["REPLICATE_API_TOKEN"])
+    try:
+        input_data = {
+            "image": base64_image,
+            "prompt": prompt
+        }
+        output = client.run(
+            "yorickvp/llava-13b:b5f6212d032508382d61ff00469ddda3e32fd8a0e75dc39d8a4191bb742157fb",
+            input=input_data
+        )
+        print("-------here is the image to text-------")
+        print("".join(output))
+        print("end of image to text")
+        return "".join(output)
 
+    except Exception as e:
+        print(f"Exception occurred: {str(e)}")
+        return "Exception occurred"
+    
+def llava_chat(prompt,image_path,config):
+    base64_image = encode_image_llava(image_path)
+    client = replicate.Client(api_token=config["REPLICATE_API_TOKEN"])
+    try:
+        input_data = {
+            "image": base64_image,
+            "prompt": prompt
+        }
+        output = client.run(
+            "yorickvp/llava-13b:b5f6212d032508382d61ff00469ddda3e32fd8a0e75dc39d8a4191bb742157fb",
+            input=input_data
+        )
+        print("----------------here is chat content ----------------")
+        print("".join(output))
+        print("end of content")
+        return "".join(output)
 
+    except Exception as e:
+        print(f"Exception occurred: {str(e)}")
+        return "Exception occurred"
 
 def gemini_image_to_text(prompt, image_path, config):
     try:
@@ -151,12 +235,11 @@ class GPT4:
 
 
     def simple_strategy(self,image_path,interest):
-        prompt1 = "Describe this image in English"
+        prompt1 = "Describe this image in a few words in English"
         extracted_text = gpt_image_to_text(prompt1, image_path, self.config)
-        prompt2 = f"""I am a {interest} lover, and I am scrolling on TikTok to find interest videos, and this video is about {extracted_text}. Please help me decide whether to stay on the video or not. Please include yes or no in your answer, just respond in one word."""
+        prompt2 = f"""I am a {interest} lover, and I am scrolling on TikTok to find {interest} videos, and this video is about {extracted_text}. Please help me decide whether to stay on the video or not. Please include yes or no in your answer, just respond in one word."""
         response = gpt_chat(prompt2, self.config)
-        self.save_to_csv(image_path, extracted_text, interest, response)
-        return str(response) 
+        return prompt2, str(response) 
         #(yes/no)
     def spacial_strategy(self, image_path, interest, cate1, cate2, cate3, cate4, cate5):
         prompt1 = "please Describe this image in a few words in English"
@@ -176,13 +259,16 @@ class GPT4:
 class Llava:
     def __init__(self):
         self.name = 'llava'
+        self.config = dotenv_values(".env")
     
     def simple_strategy(self, image_path, interest):
         prompt1 = "please Describe this image in a few words in English"
-        extracted_text = llava_image_to_text(prompt1, image_path)
-        prompt2 = f"""I am a {interest} lover, and I am scrolling on TikTok to find interest videos, and this video is about {extracted_text}. Please help me decide whether to stay on the video or not. Please include yes or no in your answer, just respond in one word."""
-        response = llava_chat(prompt2)
-        return str(response)
+        extracted_text = llava_image_to_text(prompt1, image_path,self.config)
+        prompt2 = f"""I am a {interest} lover, and I am scrolling on TikTok to find {interest} videos, and this video is about {extracted_text}. Please help me decide whether to stay on the video or not. Please include yes or no in your answer, just respond in one word."""
+        response = llava_chat(prompt2, image_path, self.config)
+        return prompt2,str(response)
+    
+
 
 class Gemini:
     def __init__(self):
@@ -215,9 +301,11 @@ class Gemini:
         categories = re.split(r'\s*,\s*', response)
         cate1, cate2, cate3, cate4, cate5 = categories[:5]
         return cate1, cate2, cate3, cate4, cate4, cate5
-    def plain_strategy(self):
-        prompt = "I am scrolling on TikTok, and this video is about \{extracted text\}. Please help me decide whether to stay on the video or not. Please include yes or no in your answer, just respond in one word."
-        
+    def plain_strategy(self, image_path):
+        prompt = "I am scrolling on TikTok, this is a picture of the content.Do you find this content interesting and want to stay? Please include yes or no in your answer, just respond in one word."
+        extracted_text = gemini_image_to_text(prompt, image_path,self.config)
+        return prompt, extracted_text
+    
     
 
     
