@@ -40,3 +40,5 @@ conda env create -f environment.yml
 ```
 
 ## 7. download the files nessasry in github and start running the code!
+
+one thing worth noting is that you should adjust the size and left up right bottom accordingly
