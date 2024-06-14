@@ -20,9 +20,9 @@ allocate memory based on your needs. IN EXPERIENCE, WINDOWS take 20GB and ANACON
 
 ## 4.Open the instance
 
-if there is any issue with that have to do with produce key click on storage and remove the two undefined disk.
-Then reopen the instance.
-Finish setting uo the windows computer.
+if there is any issue with that have to do with produce key, click on storage and remove the two undefined disk.
+Then re-open the instance.
+Finish setting of the windows computer.
 
 ## 5. Download ANACONDA or MINICONDA
 
