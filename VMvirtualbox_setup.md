@@ -20,7 +20,7 @@ allocate memory based on your needs. IN EXPERIENCE, WINDOWS take 20GB and ANACON
 
 ## 4.Open the instance
 
-if there is any issue with "<produce key>" click on storage and remove the two undefined disk.
+if there is any issue with <produce key> click on storage and remove the two undefined disk.
 Then reopen the instance.
 Finish setting uo the windows computer.
 
