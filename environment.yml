@@ -15,6 +15,6 @@ dependencies:
       - langchain-core
       - langchain-google-genai
       - openai
-#      - win32gui
-#      - win32con
+      - pywin32
+      - pillow
 
