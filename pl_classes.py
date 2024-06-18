@@ -128,34 +128,39 @@ class TikTok:
         self.window_title = "TikTok - Make Your Day - Google Chrome"
         self.name = 'TikTok'
         self.top_left = [28,188]
+        #[120,156]
         self.bottom_right = [648,1273]
+        #[682,608]
         self.count = 0
 
     def open_and_position_browser(self):
         open_and_position_browser(self.url, self.window_title)
-        # pyautogui.click(711,875)#continue
         pyautogui.click(668,598)#enter the vedio
+        # (413,550)
         time.sleep(5)
 
 class Youtube:
     def __init__(self):
         self.url = 'https://www.youtube.com/shorts/'
         self.top_left = [356,177]
+        #[409, 174]
         self.bottom_right = [980,1306]
+        #[702, 635]
         self.name = 'Youtube'
         self.count = 0
 
     def open_and_position_browser(self):
         open_and_position_chrome_window(self.url)
+        time.sleep(5)
         
 class Instagram:
     def __init__(self):
         self.url = 'https://www.instagram.com/reels/'
         self.window_title = "Instagram - Google Chrome"
         self.top_left = [410,160]
-        # [272,153]
+        #[346,127]
         self.bottom_right = [998,1133]
-        # [914,1344]
+        #[682,608]
 
         self.name = 'instagram'
         self.count = 0
