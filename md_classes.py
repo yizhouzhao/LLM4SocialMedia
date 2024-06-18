@@ -85,8 +85,32 @@ def gpt_image_to_text(prompt, image_path, config):
     text = response.choices[0].message.content
     return text
 
-def gpt_with_persona():
-    pass
+def gpto_image_to_text(prompt, image_path, config):
+    base64_image = encode_image(image_path)
+    client = OpenAI(api_key =config["OPENAI_KEY"] )
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant. You should provide your opinion."},
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": prompt},
+                    {
+                        "type": "image_url",
+                        "image_url": {
+             "url": f"data:image/jpeg;base64,{base64_image}",
+            "detail": "high"
+          },
+                    },
+                ],
+            }
+        ],
+    max_tokens=300,
+    )
+    text = response.choices[0].message.content
+    return text
+
 
 def gpt_reason(prompt1, extracted_message1 ,prompt2, image_path, config):
     base64_image = encode_image(image_path)
@@ -104,6 +128,34 @@ def gpt_reason(prompt1, extracted_message1 ,prompt2, image_path, config):
                     {
                         "type": "image_url",
                         "image_url":  f"data:image/jpeg;base64,{base64_image}",
+                    },
+                ],
+            }
+        ],
+    max_tokens=300,
+    )
+    text = response.choices[0].message.content
+    return text
+
+def gpto_reason(prompt1, extracted_message1 ,prompt2, image_path, config):
+    base64_image = encode_image(image_path)
+    client = OpenAI(api_key =config["OPENAI_KEY"] )
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant. You should provide your opinion."},
+            {"role": "user", "content": prompt1},
+            {"role": "assistant", "content": extracted_message1},
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": prompt2},
+                    {
+                        "type": "image_url",
+                        "image_url": {
+             "url": f"data:image/jpeg;base64,{base64_image}",
+            "detail": "high"
+          },
                     },
                 ],
             }
@@ -133,7 +185,22 @@ def gpt_chat(prompt, config):
     return text
 
 
-
+def gpto_chat(prompt, config):
+    client = OpenAI(api_key =config["OPENAI_KEY"])
+    response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": prompt},
+            ],
+        }
+    ],
+    max_tokens=300,
+    )
+    text = response.choices[0].message.content
+    return text
 def gemini_image_to_text(prompt, image_path, config):
     try:
         genai.configure(api_key=config["GOOGLE_API_KEY"])
@@ -225,6 +292,48 @@ def gemini_chat(prompt, config):
     print(response.text)
     print("end of content")
     return str(response.text)
+
+
+
+class GPT4o:
+    def __init__(self):
+        self.name = 'GPT4o'
+        self.config = dotenv_values(".env")
+    
+    def simple_strategy(self, image_path, interest):
+        prompt1 = f"I am a {interest} lover, and I am scrolling on TikTok to find {interest} videos, based on this screenshot, please help me decide whether to stay on the video or not. Please include yes or no in your answer, just respond in one word. "
+        extracted_text = gpto_image_to_text(prompt1, image_path,self.config)
+        if(extracted_text == "Exception occurred"):
+            return "no"
+        return prompt1, str(extracted_text)
+    def spacial_strategy(self, image_path, interest, cate1, cate2, cate3, cate4, cate5):
+        prompt1 = f"I am scrolling on TikTok. Based on this screenshot, given 7 catergories: {cate1}, {cate2}, {cate3}, {cate4}, {cate5}, {interest}, other.  Help me decide which category it belongs to. Please answer in a single word."
+        extracted_text = gpto_image_to_text(prompt1, image_path,self.config)
+        return str(extracted_text)
+    def ask_general(self, interest):
+        prompt = f"I am scrolling on TikTok, I am an illiterate person who is interested in {interest}. Can you come up with general visual content related but is not {interest} I would want to watch? Answer short word separated in commas. Your response should only be the answer."
+        response = gpto_chat(prompt,self.config)
+        response.replace(".", '')
+        categories = re.split(r'\s*,\s*', response)
+        cate1, cate2, cate3, cate4, cate5 = categories[:5]
+        return cate1, cate2, cate3, cate4, cate4, cate5
+    def plain_strategy(self, image_path):
+        prompt = "I am scrolling on TikTok, this is a picture of the content.Do you find this content interesting and want to stay? Please include yes or no in your answer, just respond in one word."
+        extracted_text = gpto_image_to_text(prompt, image_path,self.config)
+        return prompt, extracted_text
+    
+    def fundamental_expor(self, image_path):
+        prompt1 = "I am scrolling on tiktok and saw this picture. Baed on the image, is this content interesting? Help me decide. Please include yes or no in your answer, just respond in one word."
+        extracted_text1 = gpto_image_to_text(prompt1, image_path,self.config)
+        prompt2 = "Explain briefly"
+        extracted_text2 = gpto_reason(prompt1, extracted_text1, prompt2,image_path, self.config )
+        print(extracted_text1)
+        
+        print(extracted_text2)
+        return prompt1, extracted_text1, prompt2, extracted_text2
+    
+
+    
 
 
 class GPT4:
