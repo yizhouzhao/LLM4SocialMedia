@@ -1,4 +1,9 @@
-# HOW TO SET UP VMWARE TO ACCOMPLISH MULTI COMPUTER OPERATION
+# SET UP Virtual Machines
+you can set up multiple windows machines using vm virtual box, here is a general tutorial.
+here are some additional references you might find helpful:
+[youtube tutorial](https://www.youtube.com/watch?v=nvdnQX9UkMY)
+this is on ubuntu,we should install windows.
+
 ## 1.Download oracal VM VitualBox
 
 ```bash
@@ -39,6 +44,40 @@ open powershell prompt of conda and type
 conda env create -f environment.yml
 ```
 
-## 7. download the files nessasry in github and start running the code!
+## 7. Download Visual studio code or other IDEs in assisting you
+```bash
+https://code.visualstudio.com/download
+```
+## 8. download the files inside VM requirement in github and start running the code!
 
 one thing worth noting is that you should adjust the size and left up right bottom accordingly
+when you open up your virtual machine, you can click view, and resize the screen to 100% so that the adjusted coordinates works. 
+To be specific, they are 
+Youtube: left up(409,174), right bottom(702,635)
+Tiktok: initial click(413,550), left up(120,156), right bottom(489,710)
+Ins: left up(346,127), right bottom(682,608)
+in the pl_classes under the each class variables.
+
+
+# Log into Accounts
+
+For the platforms Instagram, Youtube, and Tiktok, log in to a brand new account which requires
+setting of email, password, code justification(from your email), and birthday. For birthday, I used 2000/1/1 for all of them.
+
+Emails should be aol for instagram and tiktok, and gmail for youtube. Other emails might be prone to security checks and blocks.
+You should ensure that the browser which contains your login information is the browser you opened and operated last for the code to open the url in the corresponding accounts.
+
+
+# Plain strategy
+
+For plain strategy to work, you will have 50 videos played for each platform and each media.
+So you will need 9 accounts created for thoes plain strategies.
+
+
+
+
+
+
+
+
+
