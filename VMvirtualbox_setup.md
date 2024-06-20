@@ -88,7 +88,7 @@ Plain_bot.run_experiment(Youtube(), GPT4o(), 50, 30)
 
 here is a detailed explaination of what each parameters might:
 ```bash
-run_experiment(platform = Youtube(), model = GPT4o(), n = number of trials, time = stay duration if decided to stay)
+run_experiment(platform = Youtube(), model = GPT4o(), n = number of trials, time = stay duration when decided to stay)
 ```
 
 
