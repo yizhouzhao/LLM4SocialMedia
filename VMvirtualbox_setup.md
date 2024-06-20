@@ -72,13 +72,15 @@ You should ensure that the browser which contains your login information is the 
 
 For plain strategy to work, you will have 50 videos played for each platform and each media.
 So you will need 9 accounts created for thoes plain strategies.
+
+## Import moldules
 In main, import the corresponding modules
 
 ```bash
 from exp_classes import Simple_Bot, Spatial_Bot, Plain_bot
 from pl_classes import TikTok, Youtube, Snap, Instagram
 from md_classes import Llava, Gemini, GPT4, GPT4o
-``
+```
 and then conduct experiments for each trial
 
 ```bash
