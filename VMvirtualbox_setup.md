@@ -72,6 +72,30 @@ You should ensure that the browser which contains your login information is the 
 
 For plain strategy to work, you will have 50 videos played for each platform and each media.
 So you will need 9 accounts created for thoes plain strategies.
+In main, import the corresponding modules
+
+```bash
+from exp_classes import Simple_Bot, Spatial_Bot, Plain_bot
+from pl_classes import TikTok, Youtube, Snap, Instagram
+from md_classes import Llava, Gemini, GPT4, GPT4o
+``
+and then conduct experiments for each trial
+
+```bash
+Plain_bot.run_experiment(Youtube(), GPT4o(), 50, 30)
+```
+
+here is a detailed explaination of what each parameters meant:
+```bash
+run_experiment(platform = Youtube(), model = GPT4o(), n = number of trials, time = stay duration when decided to stay)
+```
+
+you will get a folder cotaining the 50 pictures in the same directory, and a csv file that records the data
+
+# Simple Strategy
+
+For simple strategy, we introduce the 50 personas that need to be tested on every platform and every model.
+for each persona, a total of 9 accounts need to be created and for each of the account, 150 experiments are conducted where the first 100 is on training, and the later 50 is for evaluation.
 
 In main, import the corresponding modules
 
@@ -79,19 +103,24 @@ In main, import the corresponding modules
 from exp_classes import Simple_Bot, Spatial_Bot, Plain_bot
 from pl_classes import TikTok, Youtube, Snap, Instagram
 from md_classes import Llava, Gemini, GPT4, GPT4o
-```
-and then conduct experiments for each trial
-
+``
+specify persona
 ```bash
-Plain_bot.run_experiment(Youtube(), GPT4o(), 50, 30)
+Persona = "i graduated with a statistics degree. i'm a blackjack dealer. i know how to count cards in blackjack. i have 3 kids."
 ```
-
-here is a detailed explaination of what each parameters might:
+run for 150 trials.
 ```bash
-run_experiment(platform = Youtube(), model = GPT4o(), n = number of trials, time = stay duration when decided to stay)
-```
+Simple_Bot.run_experiment(Persona, TikTok(), GPT4o(), 100, 30)
+Simple_Bot.run_experiment(Persona, TikTok(), GPT4o(), 50, 0)
+```bash
 
 
+you will get a folder containing 100 pictures for the training phase and another folder containing 50 pictures for evaluation phase. In addition a csv files that contains the 150 rows of data is created.
+
+Note that the "Answer" collume which contains the "yes or no" of the decition might be not the same fromat and not always lowercased.
+
+# Spacial Strategy
+                             
 
 
 
