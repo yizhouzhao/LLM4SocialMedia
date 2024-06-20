@@ -81,6 +81,8 @@ from exp_classes import Simple_Bot, Spatial_Bot, Plain_bot
 from pl_classes import TikTok, Youtube, Snap, Instagram
 from md_classes import Llava, Gemini, GPT4, GPT4o
 ```
+
+## Conduct experiments
 and then conduct experiments for each trial
 
 ```bash
@@ -105,7 +107,7 @@ In main, import the corresponding modules
 from exp_classes import Simple_Bot, Spatial_Bot, Plain_bot
 from pl_classes import TikTok, Youtube, Snap, Instagram
 from md_classes import Llava, Gemini, GPT4, GPT4o
-``
+```
 specify persona
 ```bash
 Persona = "i graduated with a statistics degree. i'm a blackjack dealer. i know how to count cards in blackjack. i have 3 kids."
@@ -114,7 +116,7 @@ run for 150 trials.
 ```bash
 Simple_Bot.run_experiment(Persona, TikTok(), GPT4o(), 100, 30)
 Simple_Bot.run_experiment(Persona, TikTok(), GPT4o(), 50, 0)
-```bash
+```
 
 
 you will get a folder containing 100 pictures for the training phase and another folder containing 50 pictures for evaluation phase. In addition a csv files that contains the 150 rows of data is created.
