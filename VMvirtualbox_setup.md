@@ -80,14 +80,16 @@ from exp_classes import Simple_Bot, Spatial_Bot, Plain_bot
 from pl_classes import TikTok, Youtube, Snap, Instagram
 from md_classes import Llava, Gemini, GPT4, GPT4o
 ```
-and then conduct experiments for 
+and then conduct experiments for each trial
 
 ```bash
 Plain_bot.run_experiment(Youtube(), GPT4o(), 50, 30)
 ```
 
-
-
+here is a detailed explaination of what each parameters might:
+```bash
+run_experiment(platform = Youtube(), model = GPT4o(), n = number of trials, time = stay duration if decided to stay)
+```
 
 
 
