@@ -124,11 +124,35 @@ you will get a folder containing 100 pictures for the training phase and another
 Note that the "Answer" collume which contains the "yes or no" of the decition might be not the same fromat and not always lowercased.
 
 # Spacial Strategy
-                             
 
+The structure of spacial strategy is to first ask the VLM to understand the persona through the question of 
+```bash
+f"I am scrolling on TikTok, Based on your personality. Can you come up with six general visual content you given your personality might enjoy? Rank it in order. Answer short word separated in commas. Your response should only be the answer."
+```
+and then check if the video is belonging to any of the 7 categories.
+```bash
+ f"I am scrolling on TikTok. Based on this screenshot, given 7 catergories: {cate1}, {cate2}, {cate3}, {cate4}, {cate5}, {core},  other.  Help me decide which category it belongs to or related to. Please answer in a single word."
+```
 
+For spacial strategy, we introduce the 50 personas and for each persona, 9 accounts are created for testing on three plateforms and three models(can be accomplished through three gmails). Here we donot have duration time specified in main.
 
+150 experiments are conducted where the first 100 is training and the 50 is for eval.
 
+In main, import the corresponding modules, and specify the persona.
+
+```bash
+Persona = "i graduated with a statistics degree. i'm a blackjack dealer. i know how to count cards in blackjack. i have 3 kids."
+```
+And this is the command to run a whole experiment
+```bash
+Spatial_Bot.run_experiment(Persona, TikTok(),GPT4o(), 100, 50)
+```
+To explain the code, the parameters are
+```bash
+run_experiment(interest= persona, platform = Tiktok(), model = GPT4o(), training_number = 100, evaluating_number= 50)
+```
+
+You will get two csvs one containing the training information one with the evaluation. The evaluation does not have the stay duration collumn but have an additional "Type" collume that specify if the interest is core/ general/ other for analysis.
 
 
 
