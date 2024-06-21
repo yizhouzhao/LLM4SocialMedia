@@ -149,7 +149,7 @@ Spatial_Bot.run_experiment(Persona, TikTok(),GPT4o(), 100, 50)
 ```
 To explain the code, the parameters are
 ```bash
-run_experiment(interest= persona, platform = Tiktok(), model = GPT4o(), training_number = 100, evaluating_number= 50)
+run_experiment(interest= persona, platform = Tiktok(), model = GPT4o(), training_number = number of training trails, evaluating_number= number of eval trails)
 ```
 
 You will get two csvs one containing the training information one with the evaluation. The evaluation does not have the stay duration collumn but have an additional "Type" collume that specify if the interest is core/ general/ other for analysis.
