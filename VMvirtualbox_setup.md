@@ -157,9 +157,11 @@ You will get two csvs one containing the training information one with the evalu
 
 
 
+# New Spacial Strategy(prone to change)
 
-
-
+```bash
+New_spacial_bot.run_experiment(Persona, TikTok(),GPT4o(), 50,0)
+```
 
 
 
