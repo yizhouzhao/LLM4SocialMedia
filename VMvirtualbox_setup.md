@@ -15,6 +15,7 @@ install the "Create Windows 10 installation media" to get the iso file
 ```bash
 https://www.microsoft.com/en-us/software-download/windows10
 ```
+click on the exe file and download the iso file
 
 ## 3.Create new(n) instances of computer in VM Virtual box
 
