@@ -12,6 +12,7 @@ from openai import OpenAI
 import base64
 import re
 from google.generativeai.types import generation_types
+import openai
 
 
 
@@ -118,7 +119,9 @@ def gpto_unbiased_discription(prompt, image_path, config):
                     {"type": "text", "text": prompt},
                     {
                         "type": "image_url",
-                        "image_url":  f"data:image/jpeg;base64,{base64_image}",
+                        "image_url": {
+                "url": f"data:image/jpeg;base64,{base64_image}",
+                "detail": "high"},
                     },
                 ],
             }
@@ -309,6 +312,32 @@ def gpt_reason(prompt1, extracted_message1 ,prompt2, image_path, config):
   # Handle error 400
         print(f"Error 400: {e}")
         return "Exception occurred"
+
+
+def gpt_unbiased_discription(prompt, image_path, config):
+    base64_image = encode_image(image_path)
+    client = OpenAI(api_key =config["OPENAI_KEY"] )
+    response = client.chat.completions.create(
+        model="gpt-4-vision-preview",
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": prompt},
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                "url": f"data:image/jpeg;base64,{base64_image}",
+                "detail": "high"},
+                    },
+                ],
+            }
+        ],
+    max_tokens=300,
+    )
+    text = response.choices[0].message.content
+    return text
+
 
 #############################################
 #                                           #
@@ -662,15 +691,22 @@ class GPT4:
         extracted_text = gpt_image_to_text(prompt, image_path,self.config)
         return prompt, extracted_text
     
+    
     def fundamental_expor(self, image_path):
         prompt1 = "I am scrolling on tiktok and saw this picture. Baed on the image, is this content interesting? Help me decide. Please include yes or no in your answer, just respond in one word."
         extracted_text1 = gpt_image_to_text(prompt1, image_path,self.config)
         prompt2 = "Explain briefly"
         extracted_text2 = gpt_reason(prompt1, extracted_text1, prompt2,image_path, self.config )
+        prompt3 = "Describe this image in English briefly."
+        image_description = gpt_unbiased_discription(prompt3, image_path, self.config)
+
+
         print(extracted_text1)
         
         print(extracted_text2)
-        return prompt1, extracted_text1, prompt2, extracted_text2
+        print(image_description)
+        return prompt1, extracted_text1, prompt2, extracted_text2, prompt3, image_description
+    
     
     def simple_person_strat(self, image_path, interest):
         prompt1 = f"Based on the image, is this content interesting? Decide yourself based on your personality. Please include yes or no in your answer, just respond in one word."
@@ -754,10 +790,16 @@ class Gemini:
 
         prompt2 = f"What is the thing that makes this picture {att}?"
         extracted_text2 = gemini_image_to_text(prompt2, image_path, self.config )
+        prompt3 = "Describe this image in English briefly."
+        image_description = gemini_image_to_text(prompt3, image_path, self.config)
+        
         print(extracted_text1)
         
         print(extracted_text2)
-        return prompt1, extracted_text1, prompt2, extracted_text2
+        print(image_description)
+        return prompt1, extracted_text1, prompt2, extracted_text2, prompt3, image_description
+    
+
     
     def simple_person_strat(self, image_path, interest):
         prompt1 = f"Based on the image, is this content interesting? Decide yourself based on your personality. Please include yes or no in your answer, just respond in one word."
